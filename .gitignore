@@ -1,26 +1,72 @@
-# ── 本地工具链（几百 MB，不该进仓库） ──
+# ============================================================
+#  饭店点餐系统 · 仓库忽略规则
+#  原则：只把「源码 + 脚本 + 文档」提交上去，本机环境、依赖、
+#        构建产物、运行时数据和密钥一律不进仓库。
+# ============================================================
+
+# ── 本地工具链（JDK / Android SDK / Gradle / cloudflared，几百 MB） ──
 .toolchain/
 .gradle-home/
 .acl-recovery/
 
-# ── 缓存与日志 ──
-.cache/
-*.log
-
-# ── Node 依赖（三个目录各自有 node_modules） ──
+# ── 第三方依赖（app / server / scripts\tools 各自一份 node_modules） ──
 node_modules/
+.yarn/
+.pnp.*
 
-# ── Android 构建产物与本地路径 ──
+# ── 构建产物与缓存 ──
+.cache/
+.gradle/
 app/android/.gradle/
 app/android/build/
 app/android/app/build/
-app/android/local.properties
+app/android/app/release/
+app/android/app/debug/
+app/android/.cxx/
+app/android/app/.cxx/
+app/ios/Pods/
+app/ios/build/
+*.apk
+*.aab
+*.hprof
+*.class
 
-# ── 运行时数据：数据库、已上传菜品图、二维码、当前隧道地址 ──
+# ── 与本机路径绑定的配置文件 ──
+app/android/local.properties
+app/ios/Podfile.lock
+
+# ── 运行时数据：SQLite 数据库、已上传的菜品图、二维码、当前隧道地址 ──
 server/data/
 data/
+*.db
+*.db-wal
+*.db-shm
 
-# ── 临时文件与测试图片 ──
-.dsh-write-test.txt
+# ── 日志 ──
+*.log
+logs/
+
+# ── 密钥与证书（绝不入库） ──
+*.keystore
+*.jks
+*.p12
+*.pem
+.env
+.env.*
+
+# 例外：React Native 模板自带的公共调试签名，release 构建要用，
+# 而且它本来就不是秘密（密码固定 android/debug）。排除掉会导致 clone 后无法打包。
+!app/android/app/debug.keystore
+
+# ── 编辑器 / 操作系统 ──
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── 临时文件与本地测试素材 ──
 *.tmp
+*.temp
+.dsh-write-test.txt
 share_*.jpeg

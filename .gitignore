@@ -1,0 +1,26 @@
+# ── 本地工具链（几百 MB，不该进仓库） ──
+.toolchain/
+.gradle-home/
+.acl-recovery/
+
+# ── 缓存与日志 ──
+.cache/
+*.log
+
+# ── Node 依赖（三个目录各自有 node_modules） ──
+node_modules/
+
+# ── Android 构建产物与本地路径 ──
+app/android/.gradle/
+app/android/build/
+app/android/app/build/
+app/android/local.properties
+
+# ── 运行时数据：数据库、已上传菜品图、二维码、当前隧道地址 ──
+server/data/
+data/
+
+# ── 临时文件与测试图片 ──
+.dsh-write-test.txt
+*.tmp
+share_*.jpeg

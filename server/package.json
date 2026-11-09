@@ -1,0 +1,16 @@
+{
+  "name": "restaurant-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "饭店点餐 App 本地后端（Node + Express + SQLite）",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "seed": "node src/seed.mjs"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^2.5.0",
+    "sharp": "^0.35.5"
+  }
+}
